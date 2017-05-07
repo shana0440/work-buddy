@@ -1,0 +1,45 @@
+.interrupt-wrapper {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 9999;
+  width: auto;
+  border-collapse: initial;
+  border: none;
+}
+
+.interrupt-wrapper td {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.interrupt-wrapper .conversation-popovers {
+  border-radius: 5px;
+  border: 1px solid #000;
+  padding: 10px;
+  background: white;
+  position: relative;
+}
+
+.conversation-popovers:before, .conversation-popovers:after {
+  content: '';
+  border-width: 10px;
+  border-style: solid;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin-top: -10px;
+  border-color: transparent;
+}
+
+.conversation-popovers:before {
+  margin-right: -19px;
+  z-index: 999;
+  border-left-color: white;
+}
+
+.conversation-popovers:after {
+  margin-right: -20px;
+  border-left-color: black;
+}
