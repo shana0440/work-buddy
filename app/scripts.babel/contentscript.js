@@ -3,13 +3,14 @@
 class JoanAlter {
   constructor() {
     this.image = new Image();
-    this.image.src = chrome.extension.getURL('../images/testing.jpg');
+    this.image.src = chrome.extension.getURL('../images/testing.png');
     this.wrapper = this.initWrapperTable();
     this.conversationPopovers = document.createElement('div');
     this.conversationPopovers.className = 'conversation-popovers';
     this.conversationPopovers.innerText = '不想上班';
     this.wrapper.appendFirst(this.conversationPopovers);
     this.wrapper.appendSecond(this.image);
+    this.initEvent();
   }
 
   initWrapperTable() {
@@ -34,17 +35,35 @@ class JoanAlter {
     };
   }
 
+  initEvent() {
+    var wrapper = this.wrapper.html();
+    var x, y;
+    this.image.ondragstart = () => false;
+    wrapper.addEventListener('mousedown', (e) => {
+      x = e.layerX;
+      y = e.layerY;
+      window.addEventListener('mousemove', wrapperMove, true);
+    });
+
+    window.addEventListener('mouseup', () => {
+      window.removeEventListener('mousemove', wrapperMove, true);
+    })
+
+    var wrapperMove = (e) => {
+      wrapper.style.top = (e.pageY - y) + 'px';
+      wrapper.style.left = (e.pageX - x) + 'px';
+    }
+  }
+
   html() {
     return this.wrapper.html();
   }
 }
 
 chrome.runtime.onMessage.addListener((req, sender, res) => {
-  console.log('recive message');
   switch (req.directive) {
     case 'disable-app':
       document.querySelector('.interrupt-wrapper').remove();
-      res({a: 1})
       break;
     case 'enable-app':
       document.querySelector('html').append(joan.html());

@@ -16,10 +16,11 @@
 
 .interrupt-wrapper .conversation-popovers {
   border-radius: 5px;
-  border: 1px solid #000;
+  border: 1px solid rgba(0, 0, 0, .25);
   padding: 10px;
   background: white;
   position: relative;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, .2);
 }
 
 .conversation-popovers:before, .conversation-popovers:after {
@@ -41,5 +42,5 @@
 
 .conversation-popovers:after {
   margin-right: -20px;
-  border-left-color: black;
+  border-left-color: rgba(0, 0, 0, .25);
 }
