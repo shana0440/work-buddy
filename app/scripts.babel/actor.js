@@ -9,7 +9,6 @@ class Actor {
 
   injectImageAndLines() {
     var pick = ~~(Math.random() * this.imagesLinesMap.length);
-    console.log(this.imagesLinesMap[pick]);
     this.image = new Image();
     this.image.src = chrome.extension.getURL(this.imagesLinesMap[pick][0]);
     this.conversationPopovers = document.createElement('div');
