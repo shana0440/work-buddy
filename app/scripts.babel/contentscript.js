@@ -7,7 +7,7 @@ chrome.runtime.onMessage.addListener((req, sender, res) => {
       if (ele) ele.remove();
       break;
     case 'enable-app':
-      var joan = new Actor();
+      var joan = new Actor(imagesLinesMap());
       document.querySelector('html').append(joan.html());
       break;
   }

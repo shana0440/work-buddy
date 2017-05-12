@@ -1,20 +1,22 @@
 function imagesLinesMap() {
   var images = [
     '../images/testing.png',
-    '../images/testing2.png'
+    '../images/testing2.png',
+    '../images/testing3.png'
   ];
 
   var lines = [
     '不想上班...',
-    '明天是星期一 ｡･ﾟ･(ﾉД`)･ﾟ･｡'
+    '星期一要到了 ｡･ﾟ･(ﾉД`)･ﾟ･｡',
+    '好累阿(_ _).｡o○'
   ];
 
   // images index, lines index
   var imagesLinesMapping = [
     [0, 0],
-    [0, 1],
     [1, 0],
-    [1, 1]
+    [2, 1],
+    [1, 2]
   ];
 
   var imagesLinesMappingObject = [];
