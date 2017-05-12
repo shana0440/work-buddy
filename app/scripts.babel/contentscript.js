@@ -78,7 +78,7 @@ class JoanAlter {
         // open contextmenu
         e.stopPropagation();
         e.preventDefault();
-        this.contextMenu.open(e.pageX, e.pageY);
+        this.contextMenu.open(e.clientX, e.clientY);
       }
     }, true);
 
