@@ -69,7 +69,7 @@ class JoanAlter {
     var wrapper = this.wrapper.html();
     var x, y;
     this.image.ondragstart = () => false;
-    wrapper.addEventListener('mousedown', (e) => {
+    this.image.addEventListener('mousedown', (e) => {
       if (e.which == 1) { // is left click
         x = e.layerX;
         y = e.layerY;
