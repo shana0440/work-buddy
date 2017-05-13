@@ -9,14 +9,18 @@ class Actor {
   }
 
   injectImageAndLines() {
-    var pick = ~~(Math.random() * this.imagesLinesMap.length);
     this.image = new Image();
-    this.image.src = chrome.extension.getURL(this.imagesLinesMap[pick][0]);
     this.conversationPopovers = document.createElement('div');
     this.conversationPopovers.className = 'conversation-popovers';
-    this.conversationPopovers.innerText = this.imagesLinesMap[pick][1];
     this.wrapper.appendFirst(this.conversationPopovers);
     this.wrapper.appendSecond(this.image);
+    this.loadImageAndLines();
+  }
+
+  loadImageAndLines() {
+    var pick = ~~(Math.random() * this.imagesLinesMap.length);
+    this.image.src = chrome.extension.getURL(this.imagesLinesMap[pick][0]);
+    this.conversationPopovers.innerText = this.imagesLinesMap[pick][1];
   }
 
   initWrapperTable() {
@@ -39,7 +43,7 @@ class Actor {
         return wrapper;
       },
       reload: () => {
-        this.injectImageAndLines();
+        this.loadImageAndLines();
       }
     };
   }
@@ -51,6 +55,7 @@ class Actor {
     });
     this.contextmenu.addItem('Reload', () => {
       this.wrapper.reload();
+      this.contextmenu.hide();
     });
   }
 
@@ -67,7 +72,6 @@ class Actor {
         // open contextmenu
         e.stopPropagation();
         e.preventDefault();
-        console.log(1);
         this.contextmenu.open(e.clientX, e.clientY);
       }
     }, true);

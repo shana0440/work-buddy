@@ -16,7 +16,6 @@ class ContextMenu {
   }
 
   open(x, y) {
-    console.log(this.contextmenu);
     this.contextmenu.style.left = x + 'px';
     this.contextmenu.style.top = y + 'px';
     this.contextmenu.style.display = 'block';
