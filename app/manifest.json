@@ -35,6 +35,7 @@
       "css": ["styles/content.css"],
       "js": [
         "scripts/images.lines.js",
+        "scripts/contextmenu.js",
         "scripts/actor.js",
         "scripts/contentscript.js"
       ],

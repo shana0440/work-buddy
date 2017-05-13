@@ -6,6 +6,7 @@
   width: auto;
   border-collapse: initial;
   border: none;
+  background-color: transparent;
 }
 
 .interrupt-wrapper td {
@@ -56,6 +57,7 @@
   overflow: hidden;
   z-index: 1000;
   box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+  display: none;
 }
 
 .interrupt-contextmenu li {

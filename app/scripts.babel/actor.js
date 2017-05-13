@@ -3,7 +3,8 @@ class Actor {
     this.imagesLinesMap = imagesLinesMap;
     this.wrapper = this.initWrapperTable();
     this.injectImageAndLines();
-    this.contextMenu = this.initContextMenu();
+    this.contextmenu = new ContextMenu();
+    this.initContextMenu();
     this.initEvent();
   }
 
@@ -36,36 +37,21 @@ class Actor {
       },
       html: () => {
         return wrapper;
+      },
+      reload: () => {
+        this.injectImageAndLines();
       }
     };
   }
 
   initContextMenu() {
-    var wrapper = document.createElement('ul');
-    wrapper.className = 'interrupt-contextmenu';
-    var item = document.createElement('li');
-    item.innerText = 'Close';
-    item.addEventListener('contextmenu', (e) => { e.preventDefault(); })
-    item.addEventListener('click', (e) => {
+    this.contextmenu.addItem('Close', () => {
       document.querySelector('.interrupt-wrapper').remove();
       document.querySelector('.interrupt-contextmenu').remove();
-    })
-    wrapper.appendChild(item);
-    wrapper.style.display = 'none';
-    document.querySelector('html').appendChild(wrapper);
-    return {
-      open: (x, y) => {
-        wrapper.style.top = y + 'px';
-        wrapper.style.left = x + 'px';
-        wrapper.style.display = 'block';
-      },
-      hide: () => {
-        wrapper.style.display = 'none';
-      },
-      html: () => {
-        return wrapper;
-      }
-    };
+    });
+    this.contextmenu.addItem('Reload', () => {
+      this.wrapper.reload();
+    });
   }
 
   initEvent() {
@@ -81,7 +67,8 @@ class Actor {
         // open contextmenu
         e.stopPropagation();
         e.preventDefault();
-        this.contextMenu.open(e.clientX, e.clientY);
+        console.log(1);
+        this.contextmenu.open(e.clientX, e.clientY);
       }
     }, true);
 
@@ -100,8 +87,8 @@ class Actor {
     }, true);
 
     window.addEventListener('mousedown', (e) => {
-      if (e.path.indexOf(this.contextMenu.html()) == -1) {
-        this.contextMenu.hide();
+      if (this.contextmenu.notTarget(e)) {
+        this.contextmenu.hide();
       }
     })
   }
