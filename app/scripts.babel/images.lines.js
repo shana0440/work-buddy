@@ -1,14 +1,14 @@
 function imagesLinesMap() {
   var images = [
-    '../images/testing.png',
-    '../images/testing2.png',
-    '../images/testing3.png'
+    '../images/joan-of-arc-alter-1.png',
+    '../images/joan-of-arc-alter-2.png',
+    '../images/joan-of-arc-alter-3.png'
   ];
 
   var lines = [
     '不想上班...',
     '星期一要到了 ｡･ﾟ･(ﾉД`)･ﾟ･｡',
-    '好累阿(_ _).｡o○'
+    '什麼時候才下班(っ﹏-) .｡o'
   ];
 
   // images index, lines index
