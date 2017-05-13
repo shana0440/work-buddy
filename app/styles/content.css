@@ -14,6 +14,11 @@
   padding: 0;
   margin: 0;
   vertical-align: middle;
+  background-color: transparent;
+}
+
+.interrupt-wrapper td img {
+  background-color: transparent;
 }
 
 .interrupt-wrapper .conversation-popovers {
