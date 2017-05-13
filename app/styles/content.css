@@ -13,6 +13,7 @@
   border: none;
   padding: 0;
   margin: 0;
+  vertical-align: middle;
 }
 
 .interrupt-wrapper .conversation-popovers {
