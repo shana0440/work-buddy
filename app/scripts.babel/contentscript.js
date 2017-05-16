@@ -7,18 +7,18 @@ chrome.runtime.onMessage.addListener((req, sender, res) => {
       if (ele) ele.remove();
       break;
     case 'enable-app':
-      var joan = new Actor(new imagesLines(), new ContextMenu());
-      document.querySelector('html').append(joan.html());
+      var joan = new Actor(new imagesLines(), new ContextMenu(), new Wrapper(new Balloon()));
+      joan.appendTo(document.querySelector('html'));
       break;
   }
 })
 
-var joan = new Actor(new imagesLines(), new ContextMenu());
 
 chrome.storage.sync.get({
   disable: false
 }, item => {
   if (!item.disable) {
-    document.querySelector('html').append(joan.html());
+    var joan = new Actor(new imagesLines(), new ContextMenu(), new Wrapper(new Balloon()));
+    joan.appendTo(document.querySelector('html'));
   }
 })

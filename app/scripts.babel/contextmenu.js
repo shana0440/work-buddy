@@ -3,8 +3,8 @@ class ContextMenu {
     var contextmenu = document.createElement('ul');
     contextmenu.className = 'interrupt-contextmenu';
 
-    this.contextmenu = contextmenu;
-    document.querySelector('html').appendChild(this.contextmenu);
+    this.html = contextmenu;
+    document.querySelector('html').appendChild(this.html);
   }
 
   addItem(name, callback) {
@@ -12,20 +12,24 @@ class ContextMenu {
     item.innerText = name;
     item.addEventListener('contextmenu', e => e.preventDefault());
     item.addEventListener('click', callback);
-    this.contextmenu.appendChild(item);
+    this.html.appendChild(item);
   }
 
   open(x, y) {
-    this.contextmenu.style.left = x + 'px';
-    this.contextmenu.style.top = y + 'px';
-    this.contextmenu.style.display = 'block';
+    this.html.style.left = x + 'px';
+    this.html.style.top = y + 'px';
+    this.html.style.display = 'block';
   }
 
   hide() {
-    this.contextmenu.style.display = 'none';
+    this.html.style.display = 'none';
+  }
+
+  remove() {
+    this.html.remove();
   }
 
   notTarget(e) {
-    return e.path.indexOf(this.contextmenu) == -1;
+    return e.path.indexOf(this.html) == -1;
   }
 }

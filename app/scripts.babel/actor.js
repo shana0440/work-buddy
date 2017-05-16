@@ -1,71 +1,34 @@
 class Actor {
-  constructor(imagesLines, contextmenu) {
+  constructor(imagesLines, contextmenu, wrapper) {
     this.imagesLinesMap = imagesLines;
-    this.wrapper = this.initWrapperTable();
-    this.injectImageAndLines();
+    this.wrapper = wrapper;
     this.contextmenu = contextmenu;
+    this.loadImageAndLines();
     this.initContextMenu();
     this.initEvent();
   }
 
-  injectImageAndLines() {
-    this.image = new Image();
-    this.conversationPopovers = document.createElement('div');
-    this.conversationPopovers.className = 'conversation-popovers';
-    this.wrapper.appendFirst(this.conversationPopovers);
-    this.wrapper.appendSecond(this.image);
-    this.loadImageAndLines();
-  }
-
   loadImageAndLines() {
     var pick = this.imagesLinesMap.getRandom();
-    this.image.src = chrome.extension.getURL(pick.image);
-    this.conversationPopovers.innerText = pick.lines;
-  }
-
-  initWrapperTable() {
-    var wrapper = document.createElement('table');
-    wrapper.className = 'interrupt-wrapper';
-    var tr = document.createElement('tr');
-    wrapper.appendChild(tr);
-    var td1 = document.createElement('td');
-    var td2 = document.createElement('td');
-    tr.appendChild(td1);
-    tr.appendChild(td2);
-    return {
-      appendFirst: (ele) => {
-        td1.appendChild(ele);
-      },
-      appendSecond: (ele) => {
-        td2.appendChild(ele);
-      },
-      html: () => {
-        return wrapper;
-      },
-      reload: () => {
-        var right = window.innerWidth - wrapper.offsetLeft - wrapper.clientWidth;
-        this.loadImageAndLines();
-        wrapper.style.left = window.innerWidth - right - wrapper.clientWidth + 'px';
-      }
-    };
+    this.wrapper.setImage(pick.image);
+    this.wrapper.setText(pick.lines);
   }
 
   initContextMenu() {
     this.contextmenu.addItem('Close', () => {
-      document.querySelector('.interrupt-wrapper').remove();
-      document.querySelector('.interrupt-contextmenu').remove();
+      this.wrapper.remove();
+      this.contextmenu.remove();
     });
     this.contextmenu.addItem('Reload', () => {
-      this.wrapper.reload();
+      this.loadImageAndLines();
       this.contextmenu.hide();
     });
   }
 
   initEvent() {
-    var wrapper = this.wrapper.html();
+    var wrapper = this.wrapper.html;
     var x, y;
-    this.image.ondragstart = () => false;
-    this.image.addEventListener('mousedown', (e) => {
+    this.wrapper.image.addEventListener('mousedown', (e) => {
       if (e.which == 1) { // is left click
         x = e.layerX;
         y = e.layerY;
@@ -98,15 +61,15 @@ class Actor {
       }
     })
 
-    this.image.addEventListener('click', (e) => {
+    this.wrapper.image.addEventListener('click', (e) => {
       var lines = this.imagesLinesMap.getLines();
       var right = window.innerWidth - wrapper.offsetLeft - wrapper.clientWidth;
-      this.conversationPopovers.innerText = lines;
+      this.wrapper.setText(lines);
       wrapper.style.left = window.innerWidth - right - wrapper.clientWidth + 'px';
     })
   }
 
-  html() {
-    return this.wrapper.html();
+  appendTo(ele) {
+    this.wrapper.appendTo(ele);
   }
 }
