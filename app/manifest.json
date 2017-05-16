@@ -51,7 +51,7 @@
       "19": "images/icon-19.png",
       "38": "images/icon-38.png"
     },
-    "default_title": "interrupt"
+    "default_title": "work buddy"
   },
   "web_accessible_resources": ["images/*"]
 }
