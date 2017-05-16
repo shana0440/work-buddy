@@ -7,13 +7,13 @@ chrome.runtime.onMessage.addListener((req, sender, res) => {
       if (ele) ele.remove();
       break;
     case 'enable-app':
-      var joan = new Actor(imagesLinesMap());
+      var joan = new Actor(new imagesLines(), new ContextMenu());
       document.querySelector('html').append(joan.html());
       break;
   }
 })
 
-var joan = new Actor(imagesLinesMap());
+var joan = new Actor(new imagesLines(), new ContextMenu());
 
 chrome.storage.sync.get({
   disable: false

@@ -1,9 +1,9 @@
 class Actor {
-  constructor(imagesLinesMap) {
-    this.imagesLinesMap = imagesLinesMap;
+  constructor(imagesLines, contextmenu) {
+    this.imagesLinesMap = imagesLines;
     this.wrapper = this.initWrapperTable();
     this.injectImageAndLines();
-    this.contextmenu = new ContextMenu();
+    this.contextmenu = contextmenu;
     this.initContextMenu();
     this.initEvent();
   }
@@ -18,9 +18,9 @@ class Actor {
   }
 
   loadImageAndLines() {
-    var pick = ~~(Math.random() * this.imagesLinesMap.length);
-    this.image.src = chrome.extension.getURL(this.imagesLinesMap[pick][0]);
-    this.conversationPopovers.innerText = this.imagesLinesMap[pick][1];
+    var pick = this.imagesLinesMap.getRandom();
+    this.image.src = chrome.extension.getURL(pick.image);
+    this.conversationPopovers.innerText = pick.lines;
   }
 
   initWrapperTable() {
