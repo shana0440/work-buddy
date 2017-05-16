@@ -22,7 +22,7 @@ class imagesLines {
     for (var k in this.imagesLinesMapping) {
       var images = this.imagesLinesMapping[k];
       for (var i = 0; i < images.length; i++) {
-        images[i] = lines[i];
+        images[i] = lines[images[i]];
       }
     }
   }
@@ -43,6 +43,6 @@ class imagesLines {
     var image = this.pick.image;
     var linesArray = this.imagesLinesMapping[image];
     var pick = ~~(Math.random() * linesArray.length);
-    return linesArray[pick]
+    return linesArray[pick];
   }
 }
