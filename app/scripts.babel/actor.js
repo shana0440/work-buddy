@@ -95,6 +95,11 @@ class Actor {
         this.contextmenu.hide();
       }
     })
+
+    this.image.addEventListener('click', (e) => {
+      var lines = this.imagesLinesMap.getOtherLines();
+      this.conversationPopovers.innerText = lines;
+    })
   }
 
   html() {

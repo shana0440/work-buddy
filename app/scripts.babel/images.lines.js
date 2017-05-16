@@ -38,4 +38,11 @@ class imagesLines {
     };
     return this.pick;
   }
+
+  getOtherLines() {
+    var image = this.pick.image;
+    var linesArray = this.imagesLinesMapping[image];
+    var pick = ~~(Math.random() * linesArray.length);
+    return linesArray[pick]
+  }
 }
