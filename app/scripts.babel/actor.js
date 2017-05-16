@@ -43,7 +43,9 @@ class Actor {
         return wrapper;
       },
       reload: () => {
+        var right = window.innerWidth - wrapper.offsetLeft - wrapper.clientWidth;
         this.loadImageAndLines();
+        wrapper.style.left = window.innerWidth - right - wrapper.clientWidth + 'px';
       }
     };
   }
@@ -98,7 +100,9 @@ class Actor {
 
     this.image.addEventListener('click', (e) => {
       var lines = this.imagesLinesMap.getOtherLines();
+      var right = window.innerWidth - wrapper.offsetLeft - wrapper.clientWidth;
       this.conversationPopovers.innerText = lines;
+      wrapper.style.left = window.innerWidth - right - wrapper.clientWidth + 'px';
     })
   }
 
