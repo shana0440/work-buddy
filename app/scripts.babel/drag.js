@@ -11,14 +11,17 @@ Object.prototype.dragable = function (trigger) {
       y = e.layerY;
       window.addEventListener('mousemove', move, true);
     }
+    return false;
   }, true);
 
   window.addEventListener('mouseup', () => {
     window.removeEventListener('mousemove', move, true);
+    return false;
   }, true)
 
   var move = (e) => {
     this.style.top = (e.pageY - y) + 'px';
     this.style.left = (e.pageX - x) + 'px';
+    return false;
   }
 }
