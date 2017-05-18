@@ -1,6 +1,7 @@
 Object.prototype.contextmenu = function (trigger) {
   var contextmenu = document.createElement('ul');
   contextmenu.className = 'interrupt-contextmenu';
+  contextmenu.addEventListener('contextmenu', e => e.preventDefault());
   document.querySelector('html').appendChild(contextmenu);
 
   this.addEventListener('contextmenu', (e) => {
