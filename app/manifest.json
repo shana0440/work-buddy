@@ -34,6 +34,7 @@
       ],
       "css": ["styles/content.css"],
       "js": [
+        "scripts/drag.js",
         "scripts/images.lines.js",
         "scripts/balloon.js",
         "scripts/wrapper.js",

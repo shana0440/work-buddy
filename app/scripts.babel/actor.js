@@ -27,28 +27,15 @@ class Actor {
 
   initEvent() {
     var wrapper = this.wrapper.html;
-    var x, y;
+    wrapper.dragable(this.wrapper.image);
     this.wrapper.image.addEventListener('mousedown', (e) => {
-      if (e.which == 1) { // is left click
-        x = e.layerX;
-        y = e.layerY;
-        window.addEventListener('mousemove', wrapperMove, true);
-      } else if (e.which == 3) { // is right click
+      if (e.which == 3) { // is right click
         // open contextmenu
         e.stopPropagation();
         e.preventDefault();
         this.contextmenu.open(e.clientX, e.clientY);
       }
     }, true);
-
-    window.addEventListener('mouseup', () => {
-      window.removeEventListener('mousemove', wrapperMove, true);
-    }, true)
-
-    var wrapperMove = (e) => {
-      wrapper.style.top = (e.pageY - y) + 'px';
-      wrapper.style.left = (e.pageX - x) + 'px';
-    }
 
     wrapper.addEventListener('contextmenu', (e) => {
       e.preventDefault();
