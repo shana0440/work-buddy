@@ -3,8 +3,12 @@ class imagesLines {
     var lines = [
       '不想上班...',
       ['星期一要到了 ｡･ﾟ･(ﾉД`)･ﾟ･｡', () => new Date().getDay() == 0],
-      '什麼時候才下班(っ﹏-) .｡o',
-      '好想回家ヽ(´Д`；)'
+      ['什麼時候才下班(っ﹏-) .｡o', () => Array(6).fill().map((e, i) => i + 12).includes(new Date().getHours())],
+      '好想回家ヽ(´Д`；)',
+      ['快要下班了(*ﾟ▽ﾟ)ﾉ', () => new Date().getHours() == 18],
+      '再撐一下下o(^-^)o',
+      ['是睡覺的時間了(っ﹏-) .｡o', () => Array(3).fill().map((e, i) => (i + 23) % 24).includes(new Date().getHours())],
+      '...zzZZ'
     ];
 
     // images, lines index
@@ -17,6 +21,12 @@ class imagesLines {
       ],
       '../images/joan-of-arc-alter-3.png': [
         1, 3
+      ],
+      '../images/joan-of-arc-alter-4.png': [
+        4, 5
+      ],
+      '../images/x-1.png': [
+        6, 7
       ]
     };
 
