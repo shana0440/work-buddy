@@ -1,35 +1,49 @@
-class ContextMenu {
-  constructor () {
-    var contextmenu = document.createElement('ul');
-    contextmenu.className = 'interrupt-contextmenu';
+Object.prototype.contextmenu = function (trigger) {
+  var contextmenu = document.createElement('ul');
+  contextmenu.className = 'interrupt-contextmenu';
+  document.querySelector('html').appendChild(contextmenu);
 
-    this.html = contextmenu;
-    document.querySelector('html').appendChild(this.html);
+  this.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  }, true);
+
+  trigger.addEventListener('mousedown', (e) => {
+    if (e.which == 3) { // is right click
+      e.stopPropagation();
+      e.preventDefault();
+      open(e.clientX, e.clientY);
+    }
+  }, true);
+
+  var open = (x, y) => {
+    contextmenu.style.left = x + 'px';
+    contextmenu.style.top = y + 'px';
+    contextmenu.style.display = 'block';
   }
 
-  addItem(name, callback) {
-    var item = document.createElement('li');
-    item.innerText = name;
-    item.addEventListener('contextmenu', e => e.preventDefault());
-    item.addEventListener('click', callback);
-    this.html.appendChild(item);
+  window.addEventListener('mousedown', (e) => {
+    if (e.path.indexOf(contextmenu) == -1) {
+      hide();
+    }
+  })
+
+  var hide = () => {
+    contextmenu.style.display = 'none';
   }
 
-  open(x, y) {
-    this.html.style.left = x + 'px';
-    this.html.style.top = y + 'px';
-    this.html.style.display = 'block';
-  }
-
-  hide() {
-    this.html.style.display = 'none';
-  }
-
-  remove() {
-    this.html.remove();
-  }
-
-  notTarget(e) {
-    return e.path.indexOf(this.html) == -1;
+  return {
+    addItem: (name, callback) => {
+      var item = document.createElement('li');
+      item.innerText = name;
+      item.addEventListener('contextmenu', e => e.preventDefault());
+      item.addEventListener('click', callback);
+      contextmenu.appendChild(item);
+    },
+    open: open,
+    hide: hide,
+    remove: () => {
+      contextmenu.remove();
+    }
   }
 }

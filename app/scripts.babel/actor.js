@@ -1,8 +1,8 @@
 class Actor {
-  constructor(imagesLines, contextmenu, wrapper) {
+  constructor(imagesLines, wrapper) {
     this.imagesLinesMap = imagesLines;
     this.wrapper = wrapper;
-    this.contextmenu = contextmenu;
+    this.contextmenu = this.wrapper.html.contextmenu(this.wrapper.image);
     this.loadImageAndLines();
     this.initContextMenu();
     this.initEvent();
@@ -20,33 +20,17 @@ class Actor {
       this.contextmenu.remove();
     });
     this.contextmenu.addItem('Reload', () => {
+      var wrapper = this.wrapper.html;
+      var right = window.innerWidth - wrapper.offsetLeft - wrapper.clientWidth;
       this.loadImageAndLines();
       this.contextmenu.hide();
+      wrapper.style.left = window.innerWidth - right - wrapper.clientWidth + 'px';
     });
   }
 
   initEvent() {
     var wrapper = this.wrapper.html;
     wrapper.dragable(this.wrapper.image);
-    this.wrapper.image.addEventListener('mousedown', (e) => {
-      if (e.which == 3) { // is right click
-        // open contextmenu
-        e.stopPropagation();
-        e.preventDefault();
-        this.contextmenu.open(e.clientX, e.clientY);
-      }
-    }, true);
-
-    wrapper.addEventListener('contextmenu', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-    }, true);
-
-    window.addEventListener('mousedown', (e) => {
-      if (this.contextmenu.notTarget(e)) {
-        this.contextmenu.hide();
-      }
-    })
 
     this.wrapper.image.addEventListener('click', (e) => {
       var lines = this.imagesLinesMap.getLines();
