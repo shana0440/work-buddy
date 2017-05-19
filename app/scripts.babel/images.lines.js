@@ -8,7 +8,9 @@ class imagesLines {
       ['快要下班了(*ﾟ▽ﾟ)ﾉ', () => new Date().getHours() == 18],
       '再撐一下下o(^-^)o',
       ['是睡覺的時間了(っ﹏-) .｡o', () => Array(3).fill().map((e, i) => (i + 23) % 24).includes(new Date().getHours())],
-      '...zzZZ'
+      '...zzZZ',
+      ['假日要來了ヽ（´∀｀）ノ', () => new Date().getDay() == 5],
+      '前輩，請打起精神(*ﾟ▽ﾟ)ﾉ'
     ];
 
     // images, lines index
@@ -27,6 +29,9 @@ class imagesLines {
       ],
       '../images/x-1.png': [
         6, 7
+      ],
+      '../images/mash-1.png': [
+        8, 9
       ]
     };
 
